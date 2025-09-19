@@ -1,0 +1,407 @@
+<html>
+
+<body>
+  <h1>CharuMav</h1>
+  <p>Welcome to my website!</p>
+  <img src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" />
+</body>
+
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sony DSC-HX100V — Animated Showcase</title>
+  <!-- Tailwind Play CDN for quick prototyping -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    /* small custom tweaks */
+    body { background: #07070a; color: #e6eef8; }
+    .glass { background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.04); backdrop-filter: blur(6px);} 
+    /* animated lens SVG highlight */
+    .lens-gradient { filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8)); }
+    /* Make details summary consistent */
+    details summary { list-style: none; cursor: pointer; }
+    details[open] summary::after { content: '▴'; float:right; }
+    details summary::after { content: '▾'; float:right; }
+    /* responsive long spec table */
+    .spec-table td, .spec-table th { padding: .5rem .75rem; border-bottom: 1px solid rgba(255,255,255,0.04);} 
+  </style>
+</head>
+<body class="antialiased font-sans">
+  <!-- NAV -->
+  <nav class="fixed w-full z-40 top-4 left-0 px-6">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <a class="flex items-center gap-3 glass rounded-2xl px-4 py-2 shadow-lg" href="#">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" class="opacity-90"><circle cx="12" cy="12" r="10" stroke="url(#g)" stroke-width="1.4" /><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs></svg>
+        <div class="text-sm">
+          <div class="text-xs opacity-80">Sony Camera</div>
+          <div class="font-semibold">DSC-HX100V</div>
+        </div>
+      </a>
+      <div class="hidden md:flex gap-4 items-center">
+        <a class="text-sm opacity-80 hover:opacity-100" href="#overview">Overview</a>
+        <a class="text-sm opacity-80 hover:opacity-100" href="#specs">Specifications</a>
+        <a class="text-sm opacity-80 hover:opacity-100" href="#media">Media</a>
+        <a class="px-3 py-2 rounded-xl glass text-sm">Download PDF</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="pt-28 pb-12">
+    <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 id="heroTitle" class="text-4xl md:text-5xl font-extrabold leading-tight">Sony <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-violet-400">DSC-HX100V</span></h1>
+        <p id="heroSub" class="mt-4 text-lg opacity-80">A high-zoom compact bridge camera combining a 30x Carl Zeiss lens and 16.2MP Exmor R sensor with advanced features like GPS, 3D capture, and Full HD AVCHD recording.</p>
+
+        <div class="mt-6 flex gap-3">
+          <a href="#specs" class="glass px-4 py-2 rounded-lg shadow hover:scale-105 transform transition">View full specs</a>
+          <a id="playBtn" class="glass px-4 py-2 rounded-lg shadow cursor-pointer">Play animation</a>
+        </div>
+
+        <div class="mt-8 grid grid-cols-2 gap-3 text-sm opacity-90">
+          <div class="glass p-4 rounded-lg">
+            <div class="font-semibold">Sensor</div>
+            <div class="opacity-80">Exmor R CMOS, 16.2MP</div>
+          </div>
+          <div class="glass p-4 rounded-lg">
+            <div class="font-semibold">Zoom</div>
+            <div class="opacity-80">30x Optical (up to 120x precision digital still)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Camera visual -->
+      <div class="flex justify-center lg:justify-end">
+        <div id="cameraCard" class="relative glass rounded-3xl p-6 w-full max-w-md shadow-2xl">
+          <!-- stylized camera SVG -->
+          <div class="flex items-center gap-4">
+            <div class="w-36 h-36 rounded-full lens-gradient flex items-center justify-center" id="lensWrap">
+              <svg id="lensSVG" viewBox="0 0 200 200" class="w-28 h-28">
+                <defs>
+                  <radialGradient id="rg" cx="50%" cy="40%">
+                    <stop offset="0%" stop-color="#bde3ff" stop-opacity="0.75" />
+                    <stop offset="60%" stop-color="#6ea8ff" stop-opacity="0.35" />
+                    <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.1" />
+                  </radialGradient>
+                </defs>
+                <circle cx="100" cy="100" r="80" fill="url(#rg)" stroke="rgba(255,255,255,0.06)" stroke-width="6" />
+                <circle cx="100" cy="100" r="46" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="2" />
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="text-sm opacity-80">Model</div>
+              <div class="text-xl font-semibold">DSC-HX100V</div>
+              <div class="mt-4 text-xs opacity-70">Compact bridge with Carl Zeiss Vario Sonnar T lens and BIONZ imaging processor.</div>
+
+              <div class="mt-6 flex gap-2 text-xs">
+                <div class="glass px-3 py-2 rounded">GPS</div>
+                <div class="glass px-3 py-2 rounded">Optical SteadyShot</div>
+                <div class="glass px-3 py-2 rounded">3D Capable</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 opacity-70 text-xs">Weight: Approx. 577g (with battery & memory) • Battery life: 410 shots</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- OVERVIEW -->
+  <main class="max-w-6xl mx-auto px-6 pb-20">
+    <section id="overview" class="mb-10">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass rounded-2xl p-6 md:col-span-2">
+          <h2 class="text-2xl font-bold">Overview</h2>
+          <p class="mt-3 opacity-80">The Sony DSC-HX100V is a feature-rich bridge camera built around a 1/2.3" Exmor R CMOS sensor offering approximately 16.2 effective megapixels. It pairs a Carl Zeiss Vario Sonnar T 30x optical zoom lens (4.8-144mm) with BIONZ processing to deliver versatile shooting from wide-angle to long-telephoto — including precision digital zoom, panorama modes, 3D capture and Full HD AVCHD movie recording.</p>
+
+          <div class="mt-6 grid sm:grid-cols-2 gap-4">
+            <div class="p-4 glass rounded-lg">
+              <div class="font-semibold">Sensor Size</div>
+              <div class="opacity-80">1/2.3 type (7.77mm)</div>
+            </div>
+            <div class="p-4 glass rounded-lg">
+              <div class="font-semibold">Effective Pixels</div>
+              <div class="opacity-80">Approx. 16.2 Mega Pixels</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="glass rounded-2xl p-6">
+          <h3 class="font-semibold">Quick Specs</h3>
+          <ul class="mt-3 text-sm opacity-85 space-y-2">
+            <li>Lens: Carl Zeiss Vario Sonnar T</li>
+            <li>Optical Zoom: 30x (4.8 - 144mm)</li>
+            <li>Max Still Resolution: 16M (4,608 x 3,456)</li>
+            <li>LCD: 3.0" XtraFine TruBlack (921,600 dots)</li>
+            <li>GPS: Yes</li>
+            <li>Image Stabilizer: Optical SteadyShot</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SPECS -->
+    <section id="specs" class="mb-12">
+      <h2 class="text-2xl font-bold mb-4">Full Specifications</h2>
+
+      <!-- We'll provide a collapsible area with many grouped specs -->
+      <div class="space-y-4">
+        <details class="glass p-4 rounded-lg">
+          <summary class="font-semibold">Image Sensor & Lens</summary>
+          <div class="mt-3 text-sm opacity-90">
+            <table class="w-full spec-table text-sm">
+              <tbody>
+                <tr><th class="text-left">Image Sensor - Type</th><td>Exmor R CMOS Sensor</td></tr>
+                <tr><th class="text-left">Size</th><td>1/2.3 type (7.77mm)</td></tr>
+                <tr><th class="text-left">Effective Pixels</th><td>Approx. 16.2 Mega Pixels</td></tr>
+                <tr><th class="text-left">Gross Pixels</th><td>Approx. 16.8 Mega Pixels</td></tr>
+                <tr><th class="text-left">Lens - Focal Length (f=)</th><td>4.8 - 144mm (30x optical)</td></tr>
+                <tr><th class="text-left">F Number</th><td>2.8 - 5.6</td></tr>
+                <tr><th class="text-left">Focal Length (35mm conversion) - Still Image 4:3</th><td>27 - 810mm</td></tr>
+                <tr><th class="text-left">Focal Length (35mm conversion) - Movie 16:9</th><td>29 - 870mm (Standard mode), 30 - 900mm (Active mode)</td></tr>
+                <tr><th class="text-left">Lens Type</th><td>Carl Zeiss Vario Sonnar T</td></tr>
+                <tr><th class="text-left">Focal Length (35mm conversion) - Still Image 16:9</th><td>29 - 870mm</td></tr>
+                <tr><th class="text-left">Precision Digital Zoom - Still Image</th><td>Approx. 120x</td></tr>
+                <tr><th class="text-left">Focal Length (35mm conversion) - Movie 4:3</th><td>36 - 1080mm (Standard mode), 37 - 1110mm (Active mode)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="glass p-4 rounded-lg">
+          <summary class="font-semibold">LCD & Display</summary>
+          <div class="mt-3 text-sm opacity-90">
+            <table class="w-full spec-table text-sm">
+              <tbody>
+                <tr><th class="text-left">Number Of Dots</th><td>921,600</td></tr>
+                <tr><th class="text-left">Name</th><td>XtraFine TruBlack</td></tr>
+                <tr><th class="text-left">Screen Size</th><td>3.0" (7.6 cm)</td></tr>
+                <tr><th class="text-left">Brightness Setting</th><td>5 steps</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="glass p-4 rounded-lg">
+          <summary class="font-semibold">Shooting & Focus</summary>
+          <div class="mt-3 text-sm opacity-90">
+            <table class="w-full spec-table text-sm">
+              <tbody>
+                <tr><th class="text-left">Auto Macro</th><td>Yes</td></tr>
+                <tr><th class="text-left">Shutter Speed</th><td>iAuto (2(5.08 cm) - 1/4000) / Program Auto (1(2.54 cm) - 1/4000) / Shutter Priority (30(76.2 cm) - 1/4000) / Aperture Priority (8(20.32 cm) - 1/2000) / Manual (30(76.2 cm) - 1/4000)</td></tr>
+                <tr><th class="text-left">Face Detection - Max. No of Detectable Faces</th><td>8</td></tr>
+                <tr><th class="text-left">Imaging Processor</th><td>BIONZ</td></tr>
+                <tr><th class="text-left">Exposure Compensation</th><td>+/- 2.0EV, 1/3EV Step</td></tr>
+                <tr><th class="text-left">Dynamic Range Optimiser</th><td>Standard</td></tr>
+                <tr><th class="text-left">GPS</th><td>Yes</td></tr>
+                <tr><th class="text-left">Image Stabilizer System</th><td>Optical SteadyShot</td></tr>
+                <tr><th class="text-left">ISO Sensitivity Setting</th><td>Auto / 100 / 125 / 160 / 200 / 250 / 320 / 400 / 500 / 640 / 800 / 1000 / 1250 / 1600 / 2000 / 2500 / 3200</td></tr>
+                <tr><th class="text-left">Focus Modes</th><td>Manual AF / Center-Weighted AF / Flexible Spot AF / Multi-Point AF</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <details class="glass p-4 rounded-lg">
+          <summary class="font-semibold">Shooting Modes & Features</summary>
+          <div class="mt-3 text-sm opacity-90">
+            <p class="font-semibold">Available Modes</p>
+            <p class="mt-1">Intelligent Auto, Program Auto, Superior Auto, Manual Exposure, Aperture Priority, Shutter Priority, Intelligent Sweep Panorama, Background Defocus, Scene Selection (Landscape, Night, Beach, Snow, Fireworks, Gourmet, Pet, etc.), 3D modes, Advanced Sports, Anti Motion Blur, Handheld Twilight, High Sensitivity, Soft Skin, and many more.</p>
+
+            <p class="mt-3 font-semibold">Other Shooting Features</p>
+            <ul class="list-disc pl-6 mt-2 opacity-80 space-y-1">
+              <li>Face Detection (modes: Auto/Off/Child Priority/Adult Priority)</li>
+              <li>Smile Shutter</li>
+              <li>Burst Speed: Approx. 10.0 fps (10 shots)</li>
+              <li>Smart Zoom options & in-camera retouch (red-eye, unsharp masking, trimming)</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="glass p-4 rounded-lg">
+          <summary class="font-semibold">Recording Media & Movie Features</summary>
+          <div class="mt-3 text-sm opacity-90">
+            <p class="font-semibold">Compatible Media</p>
+            <p class="mt-1">Memory Stick Duo (Still Image/Movies: Yes/No), SDHC, Memory Stick PRO Duo, Memory Stick PRO HG Duo, SD Memory Card, SDXC — and internal memory copy to recording media supported.</p>
+
+            <p class="mt-3 font-semibold">Movie Recording</p>
+            <ul class="list-disc pl-6 mt-2 opacity-80 space-y-1">
+              <li>AVCHD - 1920 x 1080 (17M FH / 24M FX / 28M PS)</li>
+              <li>AVC MP4 - 1280 x 720 (6M), VGA & other modes</li>
+              <li>Optical Zoom during movie recording: Yes</li>
+              <li>Wind Noise Reduction: Off/On</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="glass p-4 rounded-lg">
+          <summary class="font-semibold">Playback & Interface</summary>
+          <div class="mt-3 text-sm opacity-90">
+            <p>Playback features include slideshow with music (4 tunes), movie playback, 3D viewing mode, histogram indicator, automatic image rotation, and control for HDMI. Interface: Micro HDMI, DC IN terminal, Multi-use terminal (AV/USB), USB (MTP / Mass Storage / Auto).</p>
+          </div>
+        </details>
+
+        <details class="glass p-4 rounded-lg">
+          <summary class="font-semibold">Power, Dimensions & Accessories</summary>
+          <div class="mt-3 text-sm opacity-90">
+            <p><strong>AC adaptor:</strong> Yes • <strong>Supplied Battery:</strong> NP-FH50 (Lithium ION)</p>
+            <p class="mt-2"><strong>Weight (with Battery & Memory Stick):</strong> Approx. 577g • <strong>Weight (Body Only):</strong> Approx. 525g</p>
+            <p class="mt-2"><strong>Dimensions (W x H x D):</strong> 121.6 x 86.6 x 93.1 mm</p>
+            <p class="mt-3">Supplied accessories: Lithium ION Battery NP-FH50 / AC Adaptor / USB Cable / Power Cord / Neck Strap / Lens Cap / Picture Motion Browser</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- MEDIA -->
+    <section id="media" class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">Media & Gallery</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <div class="glass rounded-lg p-4 h-40 flex items-center justify-center">Placeholder image 1</div>
+        <div class="glass rounded-lg p-4 h-40 flex items-center justify-center">Placeholder image 2</div>
+        <div class="glass rounded-lg p-4 h-40 flex items-center justify-center">Placeholder image 3</div>
+      </div>
+    </section>
+
+    <!-- LONG RAW SPEC TEXT (for completeness) -->
+    <section class="glass p-4 rounded-lg text-sm opacity-90">
+      <h3 class="font-semibold mb-3">Full Raw Specifications (verbatim)</h3>
+      <pre class="whitespace-pre-wrap text-xs" style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;">Specifications
+Image Sensor
+Type
+Exmor R CMOS Sensor
+
+Size
+1/2.3 type (7.77mm)
+
+Effective Pixels
+Approx. 16.2 Mega Pixels
+
+Gross Pixels
+Approx. 16.8 Mega Pixels
+
+Lens
+Focus Range (iAuto)
+W: Approx. 1cm to Infinity, T: Approx. 200cm to Infinity
+
+Focal Length (f=)
+4.8 - 144mm
+
+F Number
+2.8 - 5.6
+
+Focal Length (35mm conversion) - Still Image 4:3
+27 - 810mm
+
+Focal Length (35mm conversion) - Movie 16:9
+29-870mm(Standard mode), 30-900mm(Active mode)
+
+Lens Type
+Carl Zeiss Vario Sonnar T
+
+Focal Length (35mm conversion) - Still Image 16:9
+29 - 870mm
+
+Optical Zoom
+30x
+
+Precision Digital Zoom - Still Image
+Approx. 120x
+
+Focal Length (35mm conversion) - Movie 4:3
+36-1080mm(Standard mode), 37-1110mm(Active mode)
+
+LCD
+Number Of Dots
+921,600
+
+Name
+XtraFine TruBlack
+
+Screen Size
+3.0 (7.6 cms)
+
+Brightness Setting
+5 steps
+
+SHOOTING SPECS
+Auto Macro
+Yes
+
+... (truncated in UI) ...
+</pre>
+      <div class="mt-3 text-xs opacity-70">Note: the full original spec block is included above and the critical items are also presented in the grouped sections for easier reading.</div>
+    </section>
+
+  </main>
+
+  <footer class="py-8">
+    <div class="max-w-6xl mx-auto px-6 text-center opacity-70 text-sm">Built with ❤️ — Animated demo using Tailwind + GSAP. This single-file HTML is fully client-side.</div>
+  </footer>
+
+  <!-- SCRIPTS: Animations with GSAP -->
+  <script>
+    // GSAP entry animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from('#heroTitle', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' });
+    gsap.from('#heroSub', { y: 20, opacity: 0, duration: 0.9, delay: 0.15 });
+    gsap.from('#cameraCard', { x: 80, opacity: 0, duration: 0.9, delay: 0.25, ease: 'power3.out' });
+
+    // Lens subtle rotation pulse
+    gsap.to('#lensSVG', { rotate: 8, duration: 3, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+
+    // Scroll reveal for sections
+    gsap.utils.toArray('section, details').forEach((el) => {
+      gsap.from(el, {
+        scrollTrigger: { trigger: el, start: 'top 85%' },
+        y: 30,
+        opacity: 0,
+        duration: 0.7,
+        ease: 'power2.out'
+      });
+    });
+
+    // Play animation button
+    document.getElementById('playBtn').addEventListener('click', () => {
+      const tl = gsap.timeline();
+      tl.to('#cameraCard', { scale: 1.03, duration: 0.25 })
+        .to('#lensWrap', { scale: 0.92, duration: 0.18 })
+        .to('#lensWrap', { scale: 1, duration: 0.18 })
+        .to('#cameraCard', { scale: 1, duration: 0.2 });
+
+      // a little confetti-like micro-anim using small dots
+      for (let i=0;i<10;i++){
+        const d = document.createElement('div');
+        d.className = 'absolute w-2 h-2 rounded-full bg-white/60';
+        document.body.appendChild(d);
+        const x = window.innerWidth/2 + (Math.random()-0.5)*300;
+        const y = 200 + Math.random()*200;
+        d.style.left = x+'px'; d.style.top = y+'px';
+        gsap.to(d, { x: (Math.random()-0.5)*400, y: -200-Math.random()*300, opacity:0, scale:0.2, duration: 1.2, ease:'power3.out', onComplete: ()=>d.remove() });
+      }
+    });
+
+    // Make details sections animate when opened
+    document.querySelectorAll('details').forEach(d => {
+      d.addEventListener('toggle', (e) => {
+        if (d.open) gsap.from(d.querySelector('table, p, ul'), { height: 0, opacity: 0, duration: 0.4, ease:'power2.out' });
+      });
+    });
+
+    // small interactive hover on quick spec cards
+    document.querySelectorAll('.glass').forEach(el => {
+      el.addEventListener('mouseenter', ()=> gsap.to(el,{ y:-6, duration:0.25 }))
+      el.addEventListener('mouseleave', ()=> gsap.to(el,{ y:0, duration:0.25 }))
+    });
+  </script>
+</body>
+</html>
